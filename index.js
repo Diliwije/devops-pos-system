@@ -4,7 +4,7 @@ require('dotenv').config();
 const mongoose=require('mongoose');
 
 const app=express();
-app.use(bodyParser.urlencoded);
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const PORT=process.env.SERVER_PORT || 3000;
