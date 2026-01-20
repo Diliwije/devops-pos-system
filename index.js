@@ -7,8 +7,15 @@ const app=express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const UserRoutes=require('./routes/UserRoutes')
+const ProductRoutes=require('./routes/ProductRoutes')
+const CustomerRoutes=require('./routes/CustomerRoutes')
+const OrderRoutes=require('./routes/OrderRoutes')
+
+
+
 const PORT=process.env.SERVER_PORT || 3000;
-const MONGO_URI=process.env.MONGO_URI || 'mongodb+srv://dilshanwijerathna426_db_user:d7cZp9k4VPPAucUa@pos-devops.4z0ljwd.mongodb.net/pos-system-devops?retryWrites=true&w=majority&appName=pos-devops';
+const MONGO_URI=process.env.MONGO_URI;
 
 mongoose.connect(MONGO_URI).then(()=> {
     console.log('Mongo db connected!...');
@@ -23,3 +30,8 @@ mongoose.connect(MONGO_URI).then(()=> {
 app.get('/test',(req,resp)=>{
     return resp.json({'message':'test route success'});
 });
+
+app.use('/api/v1/users',UserRoutes) //// http://localhost:3000/api/v1/users/signup
+app.use('/api/v1/customers',CustomerRoutes)
+app.use('/api/v1/products',ProductRoutes)
+app.use('/api/v1/orders',OrderRoutes)

@@ -1,5 +1,5 @@
 const jwt=require('jsonwebtoken');
-const User=require('../model/UserSchema');
+const User=require('../module/UserSchema');
 const bcrypt=require('bcrypt');
 
 const authMiddleware=(req,resp,next)=>{
