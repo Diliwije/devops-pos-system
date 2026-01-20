@@ -34,7 +34,7 @@ const deleteCustomer =async (req,resp)=>{
         const deletedCustomer=await CustomerSchema.findByIdAndDelete({_id:req.params.id});
 
         if (!deletedCustomer) return resp.status(500).json({'message':"Customer Not Found"})
-        resp.status(200).json({'message':'Customer Deleted Successfully'});
+        resp.status(204).json({'message':'Customer Deleted Successfully'});
 }catch (e){
     resp.status(500).json({'message':"Internal Server Error",error:e.message});
     }
@@ -44,7 +44,7 @@ const deleteCustomer =async (req,resp)=>{
 const loadAllCustomers =async (req,resp)=>{
 
     try {
-        const customers=CustomerSchema.find();
+        const customers=await CustomerSchema.find();
         resp.status(200).json({'message':'Customers Found Successfully',data:customers});
         } catch (e){
         resp.status(500).json({'message':"Internal Server Error",error:e.message});
@@ -55,7 +55,7 @@ const loadAllCustomers =async (req,resp)=>{
 
 const findCustomerById =async (req,resp)=>{
     try {
-        const selectedCustomer=CustomerSchema.findOne({_id:req.params.id})
+        const selectedCustomer=await CustomerSchema.findOne({_id:req.params.id})
         if (!selectedCustomer) return resp.status(500).json({'message':"Customer Not Found"})
         resp.status(200).json({'message':'Customer Found Successfully',data:selectedCustomer});
 

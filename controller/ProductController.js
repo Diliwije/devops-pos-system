@@ -18,7 +18,7 @@ const updateProduct =async (req,resp)=>{
 
     try {
         const {description,unitPrice,qtyOnHand}=req.body;
-        const updatedProduct=ProductSchema.findByIdAndUpdate({_id:req.params.id},
+        const updatedProduct=await ProductSchema.findByIdAndUpdate({_id:req.params.id},
             {description:description,unitPrice:unitPrice,qtyOnHand:qtyOnHand},
             {new:true});
 
@@ -35,7 +35,7 @@ const updateProductQty =async (req,resp)=>{
 
     try {
         const {qtyOnHand}=req.body;
-        const updatedProduct=ProductSchema.findByIdAndUpdate({_id:req.params.id},
+        const updatedProduct= await ProductSchema.findByIdAndUpdate({_id:req.params.id},
             {qtyOnHand:qtyOnHand},
             {new:true});
 
@@ -63,7 +63,7 @@ const deleteProduct =async (req,resp)=>{
 const loadAllProducts =async (req,resp)=>{
 
     try {
-        const Products=ProductSchema.find();
+        const Products=await ProductSchema.find();
         resp.status(200).json({'message':'Products Found Successfully',data:Products});
     } catch (e){
         resp.status(500).json({'message':"Internal Server Error",error:e.message});
@@ -74,7 +74,7 @@ const loadAllProducts =async (req,resp)=>{
 
 const findProductById =async (req,resp)=>{
     try {
-        const selectedProduct=ProductSchema.findOne({_id:req.params.id})
+        const selectedProduct=await ProductSchema.findOne({_id:req.params.id})
         if (!selectedProduct) return resp.status(500).json({'message':"Product Not Found"})
         resp.status(200).json({'message':'Product Found Successfully',data:selectedProduct});
 
