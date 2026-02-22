@@ -14,6 +14,20 @@ const OrderRoutes=require('./routes/OrderRoutes')
 
 
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+  // Preflight requests must return 200 immediately — this is what was missing
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
+
 const PORT=process.env.SERVER_PORT || 3000;
 const MONGO_URI=process.env.MONGO_URI;
 
