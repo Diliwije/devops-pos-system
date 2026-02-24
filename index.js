@@ -7,12 +7,6 @@ const app=express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const UserRoutes=require('./routes/UserRoutes')
-const ProductRoutes=require('./routes/ProductRoutes')
-const CustomerRoutes=require('./routes/CustomerRoutes')
-const OrderRoutes=require('./routes/OrderRoutes')
-
-
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -26,6 +20,16 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+
+const UserRoutes=require('./routes/UserRoutes')
+const ProductRoutes=require('./routes/ProductRoutes')
+const CustomerRoutes=require('./routes/CustomerRoutes')
+const OrderRoutes=require('./routes/OrderRoutes')
+
+
+
+
 
 
 const PORT=process.env.SERVER_PORT || 3000;

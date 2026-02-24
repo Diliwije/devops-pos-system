@@ -17,7 +17,7 @@ const updateCustomer =async (req,resp)=>{
 
     try {
         const {name,address,salaray,contact}=req.body;
-        const updatedCustomer=CustomerSchema.findByIdAndUpdate({_id:req.params.id},
+        const updatedCustomer= await CustomerSchema.findByIdAndUpdate({_id:req.params.id},
             {name,address,salaray,contact},
             {new:true});
 
